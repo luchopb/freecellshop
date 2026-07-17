@@ -1,0 +1,6 @@
+{
+  "name": "Free Cell Shop",
+  "description": "Una tienda de tecnología moderna que ofrece smartphones, accesorios premium y dispositivos novedosos con un diseño inmersivo Cyber Tech, modo oscuro y carrito interactivo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

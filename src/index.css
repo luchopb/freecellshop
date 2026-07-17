@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+:root {
+  --cyber-dark: #000000;
+  --cyber-gray: #0d0d0d;
+  --cyber-blue: #84cc16; /* Apple Green */
+  --cyber-purple: #22c55e;
+  --cyber-magenta: #a3e635;
+}
+
+.dark {
+  --cyber-dark: #000000;
+  --cyber-gray: #0d0d0d;
+  --cyber-blue: #84cc16; /* Apple Green */
+  --cyber-purple: #22c55e;
+  --cyber-magenta: #a3e635;
+}
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Montserrat", "Quicksand", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, monospace;
+  
+  --color-cyber-dark: var(--cyber-dark);
+  --color-cyber-gray: var(--cyber-gray);
+  --color-cyber-blue: var(--cyber-blue);
+  --color-cyber-purple: var(--cyber-purple);
+  --color-cyber-magenta: var(--cyber-magenta);
+}
+
+/* Custom background mesh glow noise - Light Warm Tint version */
+.cyber-bg-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at top left, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.02) 0%, transparent 60%);
+  z-index: 0;
+  pointer-events: none;
+  transition: background-image 0.5s ease;
+}
+
+html.dark .cyber-bg-glow {
+  background-image: 
+    radial-gradient(circle at top left, rgba(132, 204, 22, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(132, 204, 22, 0.03) 0%, transparent 60%);
+}
+
+/* Gentle drop shadows */
+.custom-shadow-soft {
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 8px -1px rgba(0, 0, 0, 0.03);
+}
+
+.custom-shadow-card {
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 4px 12px -2px rgba(0, 0, 0, 0.02);
+}
+
+/* Light Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.glass-panel-heavy {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.glass-pill {
+  background: rgba(0, 0, 0, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+html.dark .glass-panel {
+  background: rgba(10, 10, 10, 0.85);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+html.dark .glass-panel-heavy {
+  background: rgba(10, 10, 10, 0.95);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+html.dark .glass-pill {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Custom grid patterns for light mode */
+.cyber-grid {
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.012) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+html.dark .cyber-grid {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+}
+
+/* Scrollbar customizations - Light theme friendly */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f2f6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #0d0d0d;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #27272a;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: #000000;
+  color: #f1f5f9;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  background-color: #000000;
+  color: #f1f5f9;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Pitch black background theme selectors */
+html.dark {
+  background-color: #000000 !important;
+  color: #f1f5f9;
+}
+
+html.dark body {
+  background-color: #000000 !important;
+  color: #f1f5f9;
+}
+
+/* Broad Dark Mode Compatibility Layer */
+html.dark .bg-white,
+html.dark .bg-\[\#f9f9fb\],
+html.dark .bg-slate-50,
+html.dark .bg-slate-50\/50,
+html.dark .bg-slate-100 {
+  background-color: #0d0d0d !important;
+}
+
+html.dark main,
+html.dark section {
+  background-color: #000000 !important;
+}
+
+html.dark .bg-white {
+  background-color: #0a0a0a !important;
+}
+
+html.dark .bg-slate-50 {
+  background-color: #121212 !important;
+}
+
+html.dark .bg-slate-50\/50 {
+  background-color: rgba(18, 18, 18, 0.5) !important;
+}
+
+/* Border overrides */
+html.dark .border-slate-50,
+html.dark .border-slate-100,
+html.dark .border-slate-150,
+html.dark .border-slate-200,
+html.dark .border-slate-200\/40,
+html.dark .border-slate-200\/50,
+html.dark .border-slate-300 {
+  border-color: #1e1e1e !important;
+}
+
+/* Text overrides */
+html.dark .text-slate-900,
+html.dark .text-slate-805,
+html.dark .text-slate-800,
+html.dark .text-slate-700,
+html.dark .text-slate-650,
+html.dark .text-slate-600 {
+  color: #f1f5f9 !important;
+}
+
+html.dark .text-slate-500,
+html.dark .text-slate-450,
+html.dark .text-slate-400 {
+  color: #94a3b8 !important;
+}
+
+/* Accent Color Overrides: convert blue/indigo/pink elements to Apple Green (#84cc16) in dark mode */
+html.dark .text-blue-600,
+html.dark .text-blue-500,
+html.dark .text-indigo-600,
+html.dark .text-pink-600,
+html.dark .text-blue-605,
+html.dark .text-emerald-600,
+html.dark .text-emerald-605 {
+  color: #84cc16 !important;
+}
+
+/* Background accents */
+html.dark .bg-blue-600,
+html.dark .bg-blue-500,
+html.dark .bg-indigo-600,
+html.dark .bg-emerald-600,
+html.dark .bg-emerald-500 {
+  background-color: #84cc16 !important;
+  color: #000000 !important;
+}
+
+/* Background Hover Accents */
+html.dark .hover\:bg-blue-700:hover,
+html.dark .hover\:bg-blue-600:hover,
+html.dark .hover\:bg-indigo-700:hover,
+html.dark .hover\:bg-slate-800:hover,
+html.dark .hover\:bg-slate-900:hover,
+html.dark .hover\:bg-slate-850:hover,
+html.dark .hover\:bg-emerald-700:hover {
+  background-color: #65a30d !important;
+  color: #000000 !important;
+}
+
+/* Accent border colors */
+html.dark .border-blue-600,
+html.dark .border-indigo-600,
+html.dark .border-black,
+html.dark .focus\:border-blue-600:focus {
+  border-color: #84cc16 !important;
+}
+
+html.dark .focus\:ring-blue-600:focus {
+  --tw-ring-color: #84cc16 !important;
+}
+
+/* Translucent tint backgrounds */
+html.dark .bg-blue-50,
+html.dark .bg-indigo-50,
+html.dark .bg-pink-50,
+html.dark .bg-blue-600\/10,
+html.dark .bg-emerald-50,
+html.dark .bg-slate-100 {
+  background-color: rgba(132, 204, 22, 0.08) !important;
+}
+
+/* Input boxes in dark mode */
+html.dark input,
+html.dark textarea {
+  background-color: #121212 !important;
+  border-color: #27272a !important;
+  color: #ffffff !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* Shadow depth adjustment */
+html.dark .custom-shadow-soft,
+html.dark .custom-shadow-card,
+html.dark .shadow-sm,
+html.dark .shadow-md,
+html.dark .shadow-lg,
+html.dark .shadow-xl,
+html.dark .shadow-2xl {
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.6), 0 2px 8px -1px rgba(0, 0, 0, 0.4) !important;
+}

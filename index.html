@@ -1,13 +1,1415 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="es" class="dark scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FreeCellShop Servicio Técnico Reparación de celulares venta de equipos nuevos y usados, accesorios y más.</title>
+    <title>Free Cell Shop - Servicio Técnico de Celulares y Accesorios Oficiales</title>
+    <!-- Import Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+            colors: {
+              zinc: {
+                850: '#1e1e24',
+                950: '#09090b',
+              },
+              lime: {
+                450: '#a3ff1a',
+                500: '#9EFF00',
+                600: '#8be600',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style type="text/css">
+      /* Custom scrollbars */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #09090b;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #27272a;
+        border-radius: 9999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #3f3f46;
+      }
+      /* Theme custom classes */
+      .dark-only-glow {
+        box-shadow: 0 0 40px rgba(158, 255, 0, 0.05);
+      }
+    </style>
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body class="bg-white dark:bg-[#050507] text-slate-800 dark:text-slate-300 transition-colors duration-300 antialiased overflow-x-hidden selection:bg-lime-500 selection:text-black">
+
+    <!-- Top Glow Spots -->
+    <div class="absolute top-0 left-1/4 w-[500px] h-[300px] bg-blue-500/5 dark:bg-lime-500/5 rounded-full blur-[140px] pointer-events-none z-0"></div>
+    <div class="absolute top-[800px] right-1/4 w-[400px] h-[400px] bg-indigo-500/5 dark:bg-lime-500/5 rounded-full blur-[150px] pointer-events-none z-0"></div>
+
+    <!-- Header / Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-white/80 dark:bg-[#050507]/80 backdrop-blur-md border-b border-transparent">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          
+          <!-- Logo -->
+          <a href="#home" class="flex items-center gap-2 group transition-all duration-300">
+            <img src="./src/assets/images/logofcshop.png" alt="Free Cell Shop" class="h-10 hover:scale-[1.02] transition-transform duration-300" onerror="this.src='https://freecell.uy/wp-content/uploads/2021/04/cropped-Logo-FreeCell_2_Mesa-de-trabajo-1.png'">
+          </a>
+
+          <!-- Desktop Navigation links -->
+          <div class="hidden md:flex items-center gap-8">
+            <a href="#home" data-section="home" class="nav-link relative py-2 font-display text-xs font-bold tracking-wider uppercase transition-colors text-slate-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-lime-500">Inicio</a>
+            <a href="#servicio-tecnico" data-section="servicio-tecnico" class="nav-link relative py-2 font-display text-xs font-bold tracking-wider uppercase transition-colors text-slate-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-lime-500">Servicio Técnico</a>
+            <a href="#features" data-section="features" class="nav-link relative py-2 font-display text-xs font-bold tracking-wider uppercase transition-colors text-slate-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-lime-500">Características</a>
+            <a href="#opiniones" data-section="opiniones" class="nav-link relative py-2 font-display text-xs font-bold tracking-wider uppercase transition-colors text-slate-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-lime-500">Opiniones</a>
+            <a href="#contact" data-section="contact" class="nav-link relative py-2 font-display text-xs font-bold tracking-wider uppercase transition-colors text-slate-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-lime-500">Contacto</a>
+          </div>
+
+          <!-- Navbar Actions -->
+          <div class="flex items-center gap-4">
+            
+            <!-- Dark Mode Toggle -->
+            <button onclick="toggleTheme()" class="p-2.5 rounded-full border border-slate-200 dark:border-zinc-850 hover:bg-slate-100 dark:hover:bg-zinc-900 text-slate-750 dark:text-zinc-350 transition-all cursor-pointer" aria-label="Cambiar tema">
+              <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-lime-400"></i>
+              <i data-lucide="moon" class="w-4 h-4 block dark:hidden text-blue-600"></i>
+            </button>
+
+            <!-- Contact Direct Button -->
+            <a href="https://api.whatsapp.com/send?phone=59894423423&text=Hola%20Free%20Cell%20Shop,%20vengo%20del%20sitio%20web%20y%20necesito%20asistencia." target="_blank" class="hidden sm:flex px-5 py-2.5 rounded-full font-sans font-extrabold text-[11px] tracking-tight bg-slate-950 dark:bg-lime-500 hover:bg-slate-800 dark:hover:bg-lime-600 text-white dark:text-black shadow-md transition-all duration-300">
+              WHATSAPP DIRECTO
+            </a>
+
+            <!-- Mobile menu button -->
+            <button onclick="toggleMobileMenu()" class="p-2 md:hidden rounded-lg border border-slate-200 dark:border-zinc-850 hover:bg-slate-100 dark:hover:bg-zinc-900 text-slate-600 dark:text-zinc-400 cursor-pointer">
+              <i data-lucide="menu" id="menu-icon-open" class="w-5 h-5 block"></i>
+              <i data-lucide="x" id="menu-icon-close" class="w-5 h-5 hidden"></i>
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile navigation panel -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 dark:border-zinc-900 bg-white dark:bg-[#050507] shadow-xl py-4 px-4 space-y-2">
+        <a href="#home" onclick="closeMobileMenu()" class="block py-3 px-4 rounded-xl font-display text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-900">Inicio</a>
+        <a href="#servicio-tecnico" onclick="closeMobileMenu()" class="block py-3 px-4 rounded-xl font-display text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-900">Servicio Técnico</a>
+        <a href="#features" onclick="closeMobileMenu()" class="block py-3 px-4 rounded-xl font-display text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-900">Características</a>
+        <a href="#opiniones" onclick="closeMobileMenu()" class="block py-3 px-4 rounded-xl font-display text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-900">Opiniones</a>
+        <a href="#contact" onclick="closeMobileMenu()" class="block py-3 px-4 rounded-xl font-display text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-900">Contacto</a>
+        <div class="pt-4 border-t border-slate-100 dark:border-zinc-900">
+          <a href="https://api.whatsapp.com/send?phone=59894423423&text=Hola%20Free%20Cell%20Shop..." target="_blank" class="w-full text-center block py-3.5 rounded-full font-sans font-extrabold text-xs bg-slate-950 dark:bg-lime-500 hover:bg-slate-850 dark:hover:bg-lime-600 text-white dark:text-black">
+            WHATSAPP ASISTENCIA
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Slider Panel -->
+    <section class="w-full bg-[#050507] pt-20 pb-4 relative z-10" id="home">
+      <div class="w-full">
+        <div id="hero-slider" class="relative overflow-hidden shadow-2xl border-b border-zinc-950 select-none aspect-[21/9] sm:aspect-[24/10] md:aspect-[21/8] lg:aspect-[21/7]">
+          
+          <!-- Slide 1 -->
+          <div class="slider-slide absolute inset-0 w-full h-full opacity-100 transition-opacity duration-1000 ease-in-out">
+            <img src="./src/assets/images/banner1.jpg" alt="Banner Promocional 1" class="w-full h-full object-cover select-none pointer-events-none" onerror="this.src='https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1600&q=80'">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none"></div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="slider-slide absolute inset-0 w-full h-full opacity-0 transition-opacity duration-1000 ease-in-out">
+            <img src="./src/assets/images/banner2.jpg" alt="Banner Promocional 2" class="w-full h-full object-cover select-none pointer-events-none" onerror="this.src='https://images.unsplash.com/photo-1551645121-d1034da75057?auto=format&fit=crop&w=1600&q=80'">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none"></div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="slider-slide absolute inset-0 w-full h-full opacity-0 transition-opacity duration-1000 ease-in-out">
+            <img src="./src/assets/images/banner3.jpg" alt="Banner Promocional 3" class="w-full h-full object-cover select-none pointer-events-none" onerror="this.src='https://images.unsplash.com/photo-1546054454-aa26e2b734c7?auto=format&fit=crop&w=1600&q=80'">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none"></div>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="slider-slide absolute inset-0 w-full h-full opacity-0 transition-opacity duration-1000 ease-in-out">
+            <img src="./src/assets/images/banner4.png" alt="Banner Promocional 4" class="w-full h-full object-cover select-none pointer-events-none" onerror="this.src='https://images.unsplash.com/photo-1601784551146-ca0414325984?auto=format&fit=crop&w=1600&q=80'">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none"></div>
+          </div>
+
+          <!-- Navigation Arrows -->
+          <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/60 hover:bg-[#9EFF00] border border-zinc-800 text-white hover:text-black shadow-lg flex items-center justify-center transition-all cursor-pointer backdrop-blur-sm" aria-label="Anterior banner">
+            <i data-lucide="chevron-left" class="w-5 h-5 stroke-[2.5]"></i>
+          </button>
+          <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/60 hover:bg-[#9EFF00] border border-zinc-800 text-white hover:text-black shadow-lg flex items-center justify-center transition-all cursor-pointer backdrop-blur-sm" aria-label="Siguiente banner">
+            <i data-lucide="chevron-right" class="w-5 h-5 stroke-[2.5]"></i>
+          </button>
+
+          <!-- Dots Indicator -->
+          <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2.5 bg-black/40 px-3.5 py-1.5 rounded-full backdrop-blur-md border border-white/5">
+            <button onclick="goToSlide(0)" class="slider-dot w-2.5 h-2.5 rounded-full transition-all duration-300 bg-lime-500 scale-110 shadow-sm" title="Ver banner 1"></button>
+            <button onclick="goToSlide(1)" class="slider-dot w-2.5 h-2.5 rounded-full transition-all duration-300 bg-zinc-650 hover:bg-zinc-400 bg-zinc-600" title="Ver banner 2"></button>
+            <button onclick="goToSlide(2)" class="slider-dot w-2.5 h-2.5 rounded-full transition-all duration-300 bg-zinc-650 hover:bg-zinc-400 bg-zinc-600" title="Ver banner 3"></button>
+            <button onclick="goToSlide(3)" class="slider-dot w-2.5 h-2.5 rounded-full transition-all duration-300 bg-zinc-650 hover:bg-zinc-400 bg-zinc-600" title="Ver banner 4"></button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Edge-To-Edge Banner Grid Action Buttons -->
+    <div class="w-full bg-[#050507] border-y border-zinc-900 z-20 relative">
+      <div class="grid grid-cols-2 md:grid-cols-4 bg-black divide-y divide-zinc-900 md:divide-y-0 md:divide-x divide-zinc-900/90">
+        
+        <!-- Button 1: PRESUPUESTO ONLINE -->
+        <button onclick="openModal('service-modal')" class="flex flex-col items-center justify-center py-7 px-4 md:py-10 bg-black hover:bg-[#070709] active:bg-[#030304] transition-all duration-300 group cursor-pointer text-center select-none">
+          <div class="mb-4 transform group-hover:scale-105 transition-transform duration-300">
+            <i data-lucide="wrench" class="w-10 h-10 text-[#9EFF00] stroke-[1.25]"></i>
+          </div>
+          <div class="flex items-center gap-1 justify-center">
+            <span class="font-sans font-extrabold text-[11px] md:text-xs text-white uppercase tracking-wider">Presupuesto Online</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-[#9EFF00] shrink-0 transform group-hover:translate-x-0.5 transition-transform"></i>
+          </div>
+        </button>
+
+        <!-- Button 2: SERVICIO TÉCNICO -->
+        <a href="#servicio-tecnico" class="flex flex-col items-center justify-center py-7 px-4 md:py-10 bg-black hover:bg-[#070709] active:bg-[#030304] transition-all duration-300 group cursor-pointer text-center select-none">
+          <div class="mb-4 transform group-hover:scale-105 transition-transform duration-300">
+            <i data-lucide="smartphone" class="w-10 h-10 text-[#9EFF00] stroke-[1.25]"></i>
+          </div>
+          <div class="flex items-center gap-1 justify-center">
+            <span class="font-sans font-extrabold text-[11px] md:text-xs text-white uppercase tracking-wider">Nuestros Servicios</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-[#9EFF00] shrink-0 transform group-hover:translate-x-0.5 transition-transform"></i>
+          </div>
+        </a>
+
+        <!-- Button 3: MERCADO LIBRE -->
+        <a href="https://listado.mercadolibre.com.uy/_CustId_438656875" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center justify-center py-7 px-4 md:py-10 bg-black hover:bg-[#070709] active:bg-[#030304] transition-all duration-300 group cursor-pointer text-center select-none">
+          <div class="mb-4 transform group-hover:scale-105 transition-transform duration-300">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-lime-400 to-lime-600/90 flex items-center justify-center text-black shadow-inner">
+              <i data-lucide="handshake" class="w-5 h-5 stroke-[2] text-zinc-950"></i>
+            </div>
+          </div>
+          <div class="flex items-center gap-1 justify-center">
+            <span class="font-sans font-extrabold text-[11px] md:text-xs text-white uppercase tracking-wider">Mercado Libre Shop</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-[#9EFF00] shrink-0 transform group-hover:translate-x-0.5 transition-transform"></i>
+          </div>
+        </a>
+
+        <!-- Button 4: OPINIONES DE GOOGLE -->
+        <button onclick="openModal('reviews-modal')" class="col-span-2 md:col-span-1 flex flex-col items-center justify-center py-7 px-4 md:py-10 bg-black hover:bg-[#070709] active:bg-[#030304] transition-all duration-300 group cursor-pointer text-center select-none">
+          <div class="mb-4 transform group-hover:scale-105 transition-transform duration-300">
+            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg select-none">
+              <svg viewBox="0 0 24 24" class="w-5.5 h-5.5">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.84z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="flex items-center gap-1 justify-center">
+            <span class="font-sans font-extrabold text-[11px] md:text-xs text-white uppercase tracking-wider">Opiniones de Google</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-[#9EFF00] shrink-0 transform group-hover:translate-x-0.5 transition-transform"></i>
+          </div>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Nuestros Estándares (Features) Section -->
+    <section id="features" class="py-24 relative overflow-hidden bg-white dark:bg-black border-t border-slate-100 dark:border-zinc-900 transition-colors duration-300">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-blue-500/5 dark:bg-lime-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <!-- Header Text -->
+        <div class="text-center space-y-3 mb-16">
+          <p class="font-sans text-xs text-blue-600 dark:text-lime-500 font-extrabold tracking-widest uppercase">Nuestros Estándares</p>
+          <h2 class="font-display font-normal text-4xl sm:text-5xl text-slate-900 dark:text-white tracking-tighter">¿Por qué elegir Free Cell Shop?</h2>
+          <p class="font-sans text-slate-500 dark:text-zinc-400 max-w-lg mx-auto text-sm font-light leading-relaxed">
+            No solo vendemos tecnología; respaldamos tu inversión móvil con soporte certificado de primera clase y envíos ultra veloces.
+          </p>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Card 1 -->
+          <div class="relative p-8 rounded-[28px] border border-slate-100 dark:border-zinc-900 bg-white dark:bg-zinc-950 transition-all duration-300 group hover:border-slate-300 dark:hover:border-zinc-850 hover:shadow-[0_12px_28px_rgba(0,0,0,0.03)] hover:-translate-y-1.5">
+            <div class="absolute top-4 right-4 font-sans text-[9px] font-bold text-slate-400 dark:text-zinc-550 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-850 px-2 py-0.5 rounded">EXPRESS</div>
+            <div class="w-14 h-14 rounded-2xl border flex items-center justify-center mb-6 bg-blue-50 dark:bg-lime-950/30 text-blue-600 dark:text-lime-400 border-blue-100 dark:border-lime-900/40">
+              <i data-lucide="truck" class="w-6 h-6"></i>
+            </div>
+            <div class="space-y-2">
+              <h3 class="font-display font-normal text-lg text-slate-800 dark:text-zinc-100">Envío Priority Gratis</h3>
+              <p class="font-sans text-xs text-slate-500 dark:text-zinc-400 leading-relaxed font-light">
+                Envío prioritario express asegurado sin costo a todo el país. Seguimiento en tiempo real desde que sale de nuestras instalaciones.
+              </p>
+            </div>
+            <div class="absolute left-0 bottom-0 w-0 h-[2.5px] bg-blue-600 dark:bg-lime-500 group-hover:w-full transition-all duration-500 rounded-b-[28px]"></div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="relative p-8 rounded-[28px] border border-slate-100 dark:border-zinc-900 bg-white dark:bg-zinc-950 transition-all duration-300 group hover:border-slate-300 dark:hover:border-zinc-850 hover:shadow-[0_12px_28px_rgba(0,0,0,0.03)] hover:-translate-y-1.5">
+            <div class="absolute top-4 right-4 font-sans text-[9px] font-bold text-slate-400 dark:text-zinc-550 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-850 px-2 py-0.5 rounded">SOPORTE PREMIUM</div>
+            <div class="w-14 h-14 rounded-2xl border flex items-center justify-center mb-6 bg-indigo-50 dark:bg-lime-950/30 text-indigo-600 dark:text-lime-400 border-indigo-100 dark:border-lime-900/40">
+              <i data-lucide="shield-check" class="w-6 h-6"></i>
+            </div>
+            <div class="space-y-2">
+              <h3 class="font-display font-normal text-lg text-slate-800 dark:text-zinc-100">Garantía Escrita Oficial</h3>
+              <p class="font-sans text-xs text-slate-500 dark:text-zinc-400 leading-relaxed font-light">
+                Cobertura oficial certificada de larga duración en todas tus reparaciones y teléfonos adquiridos. Tu inversión está segura con nosotros.
+              </p>
+            </div>
+            <div class="absolute left-0 bottom-0 w-0 h-[2.5px] bg-blue-600 dark:bg-lime-500 group-hover:w-full transition-all duration-500 rounded-b-[28px]"></div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="relative p-8 rounded-[28px] border border-slate-100 dark:border-zinc-900 bg-white dark:bg-zinc-950 transition-all duration-300 group hover:border-slate-300 dark:hover:border-zinc-850 hover:shadow-[0_12px_28px_rgba(0,0,0,0.03)] hover:-translate-y-1.5">
+            <div class="absolute top-4 right-4 font-sans text-[9px] font-bold text-slate-400 dark:text-zinc-550 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-850 px-2 py-0.5 rounded">SOPORTE 24H</div>
+            <div class="w-14 h-14 rounded-2xl border flex items-center justify-center mb-6 bg-pink-50 dark:bg-lime-950/30 text-pink-600 dark:text-lime-400 border-pink-100 dark:border-lime-900/40">
+              <i data-lucide="headset" class="w-6 h-6"></i>
+            </div>
+            <div class="space-y-2">
+              <h3 class="font-display font-normal text-lg text-slate-800 dark:text-zinc-100">Atención Personalizada</h3>
+              <p class="font-sans text-xs text-slate-500 dark:text-zinc-400 leading-relaxed font-light">
+                Técnicos calificados listos para darte un diagnóstico certero o responder tus dudas de manera profesional por todos nuestros canales.
+              </p>
+            </div>
+            <div class="absolute left-0 bottom-0 w-0 h-[2.5px] bg-blue-600 dark:bg-lime-500 group-hover:w-full transition-all duration-500 rounded-b-[28px]"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Servicio Técnico Section -->
+    <section id="servicio-tecnico" class="py-24 border-t border-slate-100 dark:border-zinc-900 bg-white dark:bg-[#030304] relative overflow-hidden transition-colors duration-300">
+      <div class="absolute top-0 right-1/4 w-[300px] h-[300px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div class="absolute bottom-0 left-1/4 w-[250px] h-[250px] bg-lime-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <!-- Header -->
+        <div class="text-center space-y-3 mb-16 max-w-4xl mx-auto">
+          <p class="font-sans text-xs sm:text-sm text-blue-600 dark:text-lime-400 font-extrabold tracking-widest uppercase">Laboratorio de Micro-soldadura y Reparaciones</p>
+          <h2 class="font-display font-normal text-4xl sm:text-5xl text-slate-900 dark:text-white tracking-tighter">Servicio Técnico Especializado</h2>
+          <p class="font-sans text-slate-500 dark:text-zinc-400 max-w-2xl mx-auto text-sm font-light leading-relaxed">
+            Reparamos tu iPhone, Samsung o Xiaomi utilizando repuestos grado original y maquinaria de última generación en nuestro laboratorio de Montevideo.
+          </p>
+        </div>
+
+        <!-- Content Grid: Cards left, Form right -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          <!-- Services cards block (Left) -->
+          <div class="lg:col-span-5 space-y-6">
+            
+            <!-- Service 1 -->
+            <div class="p-6 rounded-2xl border border-slate-100 dark:border-zinc-900 bg-slate-50/50 dark:bg-zinc-950/20 flex gap-5 group hover:border-slate-200 dark:hover:border-zinc-800 transition-all duration-300">
+              <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-lime-950/30 border border-blue-100 dark:border-lime-900/30 flex items-center justify-center shrink-0 text-blue-600 dark:text-lime-400">
+                <i data-lucide="smartphone" class="w-5 h-5"></i>
+              </div>
+              <div class="space-y-1">
+                <span class="font-sans text-[9px] font-extrabold text-blue-600 dark:text-lime-400 tracking-wider">REPARACIÓN EN EL DÍA</span>
+                <h4 class="font-display font-bold text-sm text-slate-850 dark:text-zinc-150">CAMBIOS DE PANTALLAS</h4>
+                <p class="font-sans text-xs text-slate-500 dark:text-zinc-400 leading-relaxed font-light">Táctiles, paneles LCD y pantallas completas OLED. Repuestos premium con calibración original.</p>
+              </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="p-6 rounded-2xl border border-slate-100 dark:border-zinc-900 bg-slate-50/50 dark:bg-zinc-950/20 flex gap-5 group hover:border-slate-200 dark:hover:border-zinc-800 transition-all duration-300">
+              <div class="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-lime-950/30 border border-indigo-100 dark:border-lime-900/30 flex items-center justify-center shrink-0 text-indigo-600 dark:text-lime-400">
+                <i data-lucide="wrench" class="w-5 h-5"></i>
+              </div>
+              <div class="space-y-1">
+                <span class="font-sans text-[9px] font-extrabold text-indigo-600 dark:text-lime-400 tracking-wider">REPUESTOS CERTIFICADOS</span>
+                <h4 class="font-display font-bold text-sm text-slate-850 dark:text-zinc-150">PINES DE CARGA Y CÁMARAS</h4>
+                <p class="font-sans text-xs text-slate-500 dark:text-zinc-400 leading-relaxed font-light">Micrófonos, pines de carga USB-C, botones físicos, lentes y cámaras frontales/traseras.</p>
+              </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="p-6 rounded-2xl border border-slate-100 dark:border-zinc-900 bg-slate-50/50 dark:bg-zinc-950/20 flex gap-5 group hover:border-slate-200 dark:hover:border-zinc-800 transition-all duration-300">
+              <div class="w-12 h-12 rounded-xl bg-pink-50 dark:bg-lime-950/30 border border-pink-100 dark:border-lime-900/30 flex items-center justify-center shrink-0 text-pink-600 dark:text-lime-400">
+                <i data-lucide="cpu" class="w-5 h-5"></i>
+              </div>
+              <div class="space-y-1">
+                <span class="font-sans text-[9px] font-extrabold text-pink-600 dark:text-lime-400 tracking-wider">DIAGNÓSTICO AVANZADO</span>
+                <h4 class="font-display font-bold text-sm text-slate-850 dark:text-zinc-150">REPARACIONES DE PLACA MADRE</h4>
+                <p class="font-sans text-xs text-slate-500 dark:text-zinc-400 leading-relaxed font-light">Micro-soldadura, reconstrucción de pistas, cortos integrados y equipos mojados.</p>
+              </div>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="p-6 rounded-2xl border border-slate-100 dark:border-zinc-900 bg-slate-50/50 dark:bg-zinc-950/20 flex gap-5 group hover:border-slate-200 dark:hover:border-zinc-800 transition-all duration-300">
+              <div class="w-12 h-12 rounded-xl bg-violet-50 dark:bg-lime-950/30 border border-violet-100 dark:border-lime-900/30 flex items-center justify-center shrink-0 text-violet-600 dark:text-lime-400">
+                <i data-lucide="battery-charging" class="w-5 h-5"></i>
+              </div>
+              <div class="space-y-1">
+                <span class="font-sans text-[9px] font-extrabold text-violet-600 dark:text-lime-400 tracking-wider">GARANTÍA DE RENDIMIENTO</span>
+                <h4 class="font-display font-bold text-sm text-slate-850 dark:text-zinc-150">CAMBIOS DE BATERÍA AL 100%</h4>
+                <p class="font-sans text-xs text-slate-500 dark:text-zinc-400 leading-relaxed font-light">Calibradas, estables y seguras. Recuperamos la autonomía total de tu smartphone.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Form block (Right) -->
+          <div class="lg:col-span-7">
+            <div class="p-8 sm:p-10 rounded-[32px] border border-slate-100 dark:border-zinc-900 bg-white dark:bg-[#07070a] shadow-[0_15px_30px_rgba(0,0,0,0.01)] relative overflow-hidden">
+              
+              <div class="absolute top-0 right-0 w-32 h-32 bg-lime-500/5 rounded-full blur-2xl pointer-events-none"></div>
+
+              <div class="space-y-2 mb-8">
+                <h3 class="font-display font-normal text-xl text-slate-850 dark:text-white">Cotizar Reparación</h3>
+                <p class="font-sans text-xs text-slate-400 dark:text-zinc-400">Completa los datos y se generará un mensaje automático directo para nuestro técnico en WhatsApp.</p>
+              </div>
+
+              <!-- Page Tech Form -->
+              <form id="tech-section-form" onsubmit="handleTechFormSubmit(event)" class="space-y-5">
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block font-sans text-[10px] text-slate-500 dark:text-zinc-450 uppercase tracking-wide mb-1.5 font-bold">Tu Nombre</label>
+                    <input type="text" id="tech-nombre" required placeholder="Ej. Juan Pérez" class="w-full bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800 rounded-full px-5 py-3 text-xs text-slate-850 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-600 dark:focus:border-lime-500 focus:ring-1 focus:ring-blue-600 dark:focus:ring-lime-500 transition-all font-semibold">
+                  </div>
+                  <div>
+                    <label class="block font-sans text-[10px] text-slate-500 dark:text-zinc-450 uppercase tracking-wide mb-1.5 font-bold">Celular / Teléfono</label>
+                    <input type="text" id="tech-contacto" required placeholder="Ej. 094 123 456" class="w-full bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800 rounded-full px-5 py-3 text-xs text-slate-850 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-600 dark:focus:border-lime-500 focus:ring-1 focus:ring-blue-600 dark:focus:ring-lime-500 transition-all font-semibold">
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block font-sans text-[10px] text-slate-500 dark:text-zinc-450 uppercase tracking-wide mb-1.5 font-bold">Modelo del Equipo</label>
+                    <input type="text" id="tech-modelo" required placeholder="Ej. iPhone 13 Pro Max" class="w-full bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800 rounded-full px-5 py-3 text-xs text-slate-850 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-600 dark:focus:border-lime-500 focus:ring-1 focus:ring-blue-600 dark:focus:ring-lime-500 transition-all font-semibold">
+                  </div>
+                  <div>
+                    <label class="block font-sans text-[10px] text-slate-500 dark:text-zinc-450 uppercase tracking-wide mb-1.5 font-bold">Falla Común aproximada</label>
+                    <select id="tech-falla" required class="w-full bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800 rounded-full px-5 py-3 text-xs text-slate-850 dark:text-white focus:outline-none focus:border-blue-600 dark:focus:border-lime-500 focus:ring-1 focus:ring-blue-600 dark:focus:ring-lime-500 transition-all font-semibold">
+                      <option value="" disabled selected>Selecciona una opción</option>
+                      <option value="Pantalla rota / Vidrio astillado">Pantalla rota / Vidrio astillado</option>
+                      <option value="Cambio de batería (Vida útil baja)">Cambio de batería (Vida útil baja)</option>
+                      <option value="Problema de carga / Puerto dañado">Problema de carga / Puerto dañado</option>
+                      <option value="Falla de placa madre (Micro-soldadura)">Falla de placa madre (Micro-soldadura)</option>
+                      <option value="Cámara rota o empañada">Cámara rota o empañada</option>
+                      <option value="Botones / Parlantes con problemas">Botones / Parlantes con problemas</option>
+                      <option value="Mojado / Daño por líquido">Mojado / Daño por líquido</option>
+                      <option value="Otro problema (Detallar abajo)">Otro problema (Detallar abajo)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block font-sans text-[10px] text-slate-500 dark:text-zinc-450 uppercase tracking-wide mb-1.5 font-bold">Cuéntanos más detalles</label>
+                  <textarea id="tech-descripcion" rows="4" placeholder="Describe los síntomas o cómo ocurrió la falla..." class="w-full bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800 rounded-[20px] px-5 py-3 text-xs text-slate-850 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-600 dark:focus:border-lime-500 focus:ring-1 focus:ring-blue-600 dark:focus:ring-lime-500 transition-all font-medium resize-none"></textarea>
+                </div>
+
+                <!-- Feedback Success Panel inside form (Hidden by default) -->
+                <div id="tech-form-success" class="hidden p-4 rounded-2xl border border-emerald-800 bg-emerald-950/20 text-emerald-400 font-bold text-xs tracking-tight flex items-center gap-2">
+                  <i data-lucide="check" class="w-4 h-4 text-emerald-450"></i>
+                  <span>¡Solicitud procesada correctamente! Abriendo conversación técnica en WhatsApp...</span>
+                </div>
+
+                <button type="submit" id="tech-form-btn" class="w-full py-4 rounded-full font-sans font-extrabold text-sm tracking-tight bg-slate-950 dark:bg-lime-500 hover:bg-slate-800 dark:hover:bg-lime-600 text-white dark:text-black shadow-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer">
+                  <span>SOLICITAR PRESUPUESTO EN WHATSAPP</span>
+                  <i data-lucide="send" class="w-4 h-4"></i>
+                </button>
+
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Opiniones Section -->
+    <section id="opiniones" class="py-24 border-t border-slate-100 dark:border-zinc-900 relative overflow-hidden bg-slate-50/50 dark:bg-zinc-950/20 transition-colors duration-300">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Google rating header block -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+          <div class="space-y-3">
+            <p class="font-sans text-xs text-blue-600 dark:text-lime-500 font-extrabold tracking-widest uppercase">Nuestra Reputación</p>
+            <h2 class="font-display font-normal text-4xl sm:text-5xl text-slate-900 dark:text-white tracking-tighter">La opinión de nuestros clientes</h2>
+            <p class="font-sans text-slate-500 dark:text-zinc-400 max-w-lg text-sm font-light leading-relaxed">
+              La confianza se gana con honestidad, repuestos de calidad y cumplimiento estricto de las garantías escritas.
+            </p>
+          </div>
+
+          <!-- Rating Recap badge -->
+          <div class="flex items-center gap-4 bg-white dark:bg-zinc-950 border border-slate-100 dark:border-zinc-900 p-4 rounded-2xl shrink-0 shadow-sm">
+            <div class="text-center">
+              <p class="font-display font-black text-3xl text-slate-850 dark:text-white tracking-tight leading-none">4.9</p>
+              <p class="font-sans text-[8px] text-slate-450 dark:text-zinc-500 uppercase font-bold mt-1.5">sobre 5 estrellas</p>
+            </div>
+            <div class="h-10 w-px bg-slate-100 dark:bg-zinc-800"></div>
+            <div>
+              <div class="flex text-amber-400 gap-0.5 mb-1">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+              </div>
+              <p class="font-sans text-[11px] text-slate-500 dark:text-zinc-400 font-semibold">328 opiniones en Google Maps</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Horizontal Testimonial Cards Layout (3 verified cards) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Testimonial 1 -->
+          <div class="p-8 rounded-[30px] border border-slate-100 dark:border-zinc-900 bg-white dark:bg-zinc-950 flex flex-col justify-between hover:border-slate-300 dark:hover:border-zinc-800 transition-all duration-300 shadow-sm relative group">
+            <div class="space-y-4">
+              <div class="flex text-amber-400 gap-0.5">
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+              </div>
+              <p class="font-sans text-xs text-slate-600 dark:text-zinc-300 leading-relaxed font-light italic">
+                "Excelente servicio. Llevé mi iPhone por un cambio de pantalla y batería. Quedó espectacular, pronto en pocas horas y con garantía por escrito. Muy buena atención."
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-6 mt-6 border-t border-slate-50 dark:border-zinc-900">
+              <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&q=80" alt="Diego Falero" class="w-8 h-8 rounded-full object-cover">
+              <div>
+                <h5 class="font-display font-bold text-xs text-slate-800 dark:text-zinc-150">Diego Falero</h5>
+                <span class="font-sans text-[9px] text-slate-400 dark:text-zinc-500 font-semibold">Cliente Verificado</span>
+              </div>
+            </div>
+            <div class="absolute top-8 right-8 w-5 h-5 rounded-full bg-slate-50 dark:bg-zinc-900 border border-slate-100 dark:border-zinc-850 flex items-center justify-center font-sans text-[10px] text-slate-400 dark:text-zinc-550 font-bold select-none">G</div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="p-8 rounded-[30px] border border-slate-100 dark:border-zinc-900 bg-white dark:bg-zinc-950 flex flex-col justify-between hover:border-slate-300 dark:hover:border-zinc-800 transition-all duration-300 shadow-sm relative group">
+            <div class="space-y-4">
+              <div class="flex text-amber-400 gap-0.5">
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+              </div>
+              <p class="font-sans text-xs text-slate-600 dark:text-zinc-300 leading-relaxed font-light italic">
+                "Excelente el laboratorio de micro-soldadura. Tenía un celular mojado que daban por perdido en otros lados, y ellos lograron recuperarlo por completo. Unos capos."
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-6 mt-6 border-t border-slate-50 dark:border-zinc-900">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80" alt="Valentina Cabrera" class="w-8 h-8 rounded-full object-cover">
+              <div>
+                <h5 class="font-display font-bold text-xs text-slate-800 dark:text-zinc-150">Valentina Cabrera</h5>
+                <span class="font-sans text-[9px] text-slate-400 dark:text-zinc-500 font-semibold">Cliente Verificado</span>
+              </div>
+            </div>
+            <div class="absolute top-8 right-8 w-5 h-5 rounded-full bg-slate-50 dark:bg-zinc-900 border border-slate-100 dark:border-zinc-850 flex items-center justify-center font-sans text-[10px] text-slate-400 dark:text-zinc-550 font-bold select-none">G</div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="p-8 rounded-[30px] border border-slate-100 dark:border-zinc-900 bg-white dark:bg-zinc-950 flex flex-col justify-between hover:border-slate-300 dark:hover:border-zinc-800 transition-all duration-300 shadow-sm relative group">
+            <div class="space-y-4">
+              <div class="flex text-amber-400 gap-0.5">
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+              </div>
+              <p class="font-sans text-xs text-slate-600 dark:text-zinc-300 leading-relaxed font-light italic">
+                "Segunda compra que hago aquí y todo de primera. El soporte por WhatsApp es inmediato y muy profesional. Recomiendo el servicio al 100%."
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-6 mt-6 border-t border-slate-50 dark:border-zinc-900">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80" alt="Santiago Silva" class="w-8 h-8 rounded-full object-cover">
+              <div>
+                <h5 class="font-display font-bold text-xs text-slate-800 dark:text-zinc-150">Santiago Silva</h5>
+                <span class="font-sans text-[9px] text-slate-400 dark:text-zinc-500 font-semibold">Cliente Verificado</span>
+              </div>
+            </div>
+            <div class="absolute top-8 right-8 w-5 h-5 rounded-full bg-slate-50 dark:bg-zinc-900 border border-slate-100 dark:border-zinc-850 flex items-center justify-center font-sans text-[10px] text-slate-400 dark:text-zinc-550 font-bold select-none">G</div>
+          </div>
+
+        </div>
+
+        <!-- Button to open reviews list modal popup -->
+        <div class="mt-12 text-center">
+          <button onclick="openModal('reviews-modal')" class="px-6 py-3.5 rounded-full border border-slate-200 dark:border-zinc-850 text-slate-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-lime-500 bg-white dark:bg-black hover:border-slate-300 dark:hover:border-zinc-700 font-sans font-bold text-xs tracking-tight transition-all duration-300 flex items-center gap-2 mx-auto cursor-pointer">
+            <span>VER MÁS OPINIONES EN DETALLE</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contact" class="py-24 border-t border-slate-100 dark:border-zinc-900 bg-white dark:bg-black transition-colors duration-300">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          
+          <!-- Info Details Column (Left) -->
+          <div class="lg:col-span-5 space-y-8">
+            <div class="space-y-3">
+              <p class="font-sans text-xs text-blue-600 dark:text-lime-400 font-extrabold tracking-widest uppercase">Canales de Comunicación</p>
+              <h2 class="font-display font-normal text-4xl sm:text-5xl text-slate-900 dark:text-white tracking-tighter">Ponete en contacto</h2>
+              <p class="font-sans text-slate-500 dark:text-zinc-400 text-sm font-light leading-relaxed max-w-sm">
+                ¿Tenés dudas sobre una reparación o un presupuesto? Escribinos y nuestro equipo de soporte técnico oficial te responderá a la brevedad.
+              </p>
+            </div>
+
+            <!-- Channels list -->
+            <div class="space-y-4">
+              
+              <!-- Direct Line -->
+              <div class="flex items-center gap-4 p-4 rounded-2xl border border-slate-100 dark:border-zinc-900 bg-slate-50/50 dark:bg-zinc-950/30 shadow-sm">
+                <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-lime-950/30 flex items-center justify-center shrink-0">
+                  <i data-lucide="phone-call" class="w-4 h-4 text-blue-600 dark:text-lime-400 animate-bounce"></i>
+                </div>
+                <div>
+                  <h6 class="font-display font-normal text-xs text-slate-800 dark:text-zinc-200">Canal Telefónico Directo</h6>
+                  <a href="tel:+59829022659" class="font-sans text-xs text-slate-650 dark:text-zinc-300 font-bold hover:text-blue-600 dark:hover:text-lime-400 transition-colors">+598 2902 2659</a>
+                </div>
+              </div>
+
+              <!-- Location -->
+              <div class="flex items-center gap-4 p-4 rounded-2xl border border-slate-100 dark:border-zinc-900 bg-slate-50/50 dark:bg-zinc-950/30 shadow-sm">
+                <div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-lime-950/30 flex items-center justify-center shrink-0">
+                  <i data-lucide="map-pin" class="w-4 h-4 text-indigo-600 dark:text-lime-400"></i>
+                </div>
+                <div>
+                  <h6 class="font-display font-normal text-xs text-slate-800 dark:text-zinc-200">Oficinas / Showroom Principal</h6>
+                  <p class="font-sans text-xs text-slate-500 dark:text-zinc-400 font-medium">Galería De Las Américas, Av. 18 de Julio 1240, 11100 Montevideo, Uruguay</p>
+                </div>
+              </div>
+
+              <!-- Clock Hours -->
+              <div class="flex items-center gap-4 p-4 rounded-2xl border border-slate-100 dark:border-zinc-900 bg-slate-50/50 dark:bg-zinc-950/30 shadow-sm">
+                <div class="w-10 h-10 rounded-xl bg-pink-50 dark:bg-lime-950/30 flex items-center justify-center shrink-0">
+                  <i data-lucide="clock" class="w-4 h-4 text-pink-600 dark:text-lime-400"></i>
+                </div>
+                <div>
+                  <h6 class="font-display font-normal text-xs text-slate-800 dark:text-zinc-200">Horario de Despacho</h6>
+                  <p class="font-sans text-xs text-slate-500 dark:text-zinc-400 font-medium">Lunes a Viernes de 10 a 19h</p>
+                </div>
+              </div>
+
+              <!-- Instagram social link -->
+              <div class="flex items-center gap-4 p-4 rounded-2xl border border-slate-100 dark:border-zinc-900 bg-slate-50/50 dark:bg-zinc-950/30 shadow-sm">
+                <div class="w-10 h-10 rounded-xl bg-violet-50 dark:bg-lime-950/30 flex items-center justify-center shrink-0">
+                  <i data-lucide="instagram" class="w-4 h-4 text-violet-600 dark:text-lime-400"></i>
+                </div>
+                <div>
+                  <h6 class="font-display font-normal text-xs text-slate-800 dark:text-zinc-200">Instagram Oficial</h6>
+                  <a href="http://www.instagram.com/freecellshop" target="_blank" rel="noreferrer" class="font-sans text-xs text-blue-600 dark:text-lime-400 font-bold hover:underline">@freecellshop</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Digital Messages Box (Right) -->
+          <div class="lg:col-span-7">
+            <div class="p-8 sm:p-10 rounded-[32px] border border-slate-100 dark:border-zinc-900 bg-white dark:bg-zinc-950 shadow-[0_15px_30px_rgba(0,0,0,0.02)] relative overflow-hidden">
+              
+              <h3 class="font-display font-normal text-lg text-slate-800 dark:text-zinc-200 mb-6">Enviar Mensaje Digital</h3>
+              
+              <!-- Direct message form -->
+              <form id="contact-form" onsubmit="handleContactFormSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block font-sans text-[10px] text-slate-500 dark:text-zinc-450 uppercase tracking-wide mb-1.5 font-bold">Nombre Completo</label>
+                    <input type="text" id="contact-name" required placeholder="Ej. Martín" class="w-full bg-slate-50 dark:bg-zinc-900 border border-slate-100 dark:border-zinc-800 rounded-full px-5 py-3.5 text-xs text-slate-850 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-600 dark:focus:border-lime-500 focus:ring-1 focus:ring-blue-600 dark:focus:ring-lime-500 transition-all font-semibold">
+                  </div>
+                  <div>
+                    <label class="block font-sans text-[10px] text-slate-500 dark:text-zinc-450 uppercase tracking-wide mb-1.5 font-bold">Correo de Respuesta</label>
+                    <input type="email" id="contact-email" required placeholder="martin@tech.co" class="w-full bg-slate-50 dark:bg-zinc-900 border border-slate-100 dark:border-zinc-800 rounded-full px-5 py-3.5 text-xs text-slate-850 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-600 dark:focus:border-lime-500 focus:ring-1 focus:ring-blue-600 dark:focus:ring-lime-500 transition-all font-semibold">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block font-sans text-[10px] text-slate-500 dark:text-zinc-450 uppercase tracking-wide mb-1.5 font-bold">Tu Mensaje</label>
+                  <textarea id="contact-msg" rows="4" required placeholder="Hola Free Cell Shop, me interesa consultar por..." class="w-full bg-slate-50 dark:bg-zinc-900 border border-slate-100 dark:border-zinc-800 rounded-[20px] px-5 py-3.5 text-xs text-slate-850 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-600 dark:focus:border-lime-500 focus:ring-1 focus:ring-blue-600 dark:focus:ring-lime-500 transition-all font-medium resize-none"></textarea>
+                </div>
+
+                <!-- Toast/Banner internally within Card container -->
+                <div id="contact-success" class="hidden p-4 rounded-2xl border border-emerald-800 bg-emerald-950/20 text-emerald-400 font-bold text-xs tracking-tight flex items-center gap-2">
+                  <i data-lucide="check" class="w-4 h-4 text-emerald-450"></i>
+                  <span>¡Mensaje transmitido con éxito! Nos comunicaremos contigo vía email a la brevedad.</span>
+                </div>
+
+                <button type="submit" id="contact-btn" class="w-full py-4 rounded-full font-sans font-extrabold text-sm tracking-tight bg-slate-950 dark:bg-lime-500 hover:bg-slate-800 dark:hover:bg-lime-600 text-white dark:text-black shadow-md transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer">
+                  <span>TRANSMITIR MENSAJE DIGITAL</span>
+                  <i data-lucide="send" class="w-4 h-4"></i>
+                </button>
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-24 relative overflow-hidden border-t border-b border-zinc-900 bg-black text-center" id="newsletter">
+      <div class="absolute top-0 right-10 w-[200px] h-[200px] bg-lime-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+      <div class="absolute bottom-0 left-10 w-[250px] h-[250px] bg-lime-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8">
+        
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-[20px] bg-lime-950/20 border border-lime-900/30 mx-auto shadow-sm">
+          <i data-lucide="mail" class="w-6 h-6 text-lime-500"></i>
+        </div>
+
+        <div class="space-y-3">
+          <h2 class="font-display font-normal text-3xl sm:text-4xl text-white tracking-tighter">Únete al Club de Lanzamientos</h2>
+          <p class="font-sans text-xs sm:text-sm text-zinc-400 font-light max-w-lg mx-auto leading-relaxed">
+            Recibe avisos prioritarios de novedades de stock técnico, ofertas de locura de temporada y cupones de descuento exclusivos directo en tu casilla.
+          </p>
+        </div>
+
+        <div class="max-w-md mx-auto relative font-sans">
+          <form id="newsletter-form" onsubmit="handleNewsletterSubmit(event)" class="flex flex-col sm:flex-row gap-3">
+            <div class="relative flex-1">
+              <i data-lucide="mail" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500"></i>
+              <input type="email" id="newsletter-email" required placeholder="Ingresa tu dirección de email" class="w-full bg-zinc-900 border border-zinc-800 rounded-full pl-11 pr-4 py-3.5 font-sans text-xs text-white placeholder-zinc-550 focus:outline-none focus:border-lime-500 focus:ring-1 focus:ring-lime-500 font-semibold transition-all shadow-sm">
+            </div>
+            <button type="submit" id="newsletter-btn" class="py-3.5 px-6 rounded-full font-sans text-xs font-extrabold tracking-tight text-black bg-lime-500 hover:bg-lime-600 transition-all cursor-pointer flex items-center justify-center gap-1.5 shrink-0">
+              <span>SUSCRIBIRME</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </form>
+
+          <div id="newsletter-success" class="hidden p-4 rounded-full border border-emerald-850 bg-emerald-950/20 text-emerald-400 font-bold text-xs tracking-tight flex items-center justify-center gap-2 shadow-sm">
+            <i data-lucide="check" class="w-4 h-4 text-emerald-450"></i>
+            <span>¡Suscrito con éxito! Gracias por sumarte a Free Cell Shop.</span>
+          </div>
+        </div>
+
+        <p class="font-sans text-[10px] text-zinc-500 tracking-wide pt-2">
+          *Respetamos tu privacidad. No enviamos spam y puedes desuscribirte en cualquier momento.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#050507] text-slate-400 border-t border-zinc-900 py-16 relative z-10 text-xs transition-colors duration-300">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pb-8 border-b border-slate-900 dark:border-zinc-900">
+          
+          <div class="md:col-span-4 space-y-3">
+            <img src="./src/assets/images/logofcshop.png" alt="Free Cell Shop" class="h-8 hover:scale-[1.02] transition-transform duration-300 brightness-0 invert" onerror="this.src='https://freecell.uy/wp-content/uploads/2021/04/cropped-Logo-FreeCell_2_Mesa-de-trabajo-1.png'">
+            <p class="font-sans text-slate-400 dark:text-zinc-500 font-light leading-relaxed max-w-xs text-xs">
+              La tienda de repuestos y servicio técnico preferida por los fanáticos de la tecnología en Uruguay.
+            </p>
+          </div>
+
+          <div class="md:col-span-5 grid grid-cols-3 gap-4">
+            <div class="space-y-2">
+              <h6 class="font-sans font-extrabold text-white text-[10px] tracking-wider uppercase">Secciones</h6>
+              <ul class="space-y-1.5 font-sans text-xs text-slate-400 dark:text-zinc-500">
+                <li><a href="#home" class="hover:text-blue-400 dark:hover:text-lime-400 transition-colors">Inicio</a></li>
+                <li><a href="#servicio-tecnico" class="hover:text-blue-400 dark:hover:text-lime-400 transition-colors">S. Técnico</a></li>
+                <li><a href="#features" class="hover:text-blue-400 dark:hover:text-lime-400 transition-colors">Detalles</a></li>
+                <li><a href="#opiniones" class="hover:text-blue-400 dark:hover:text-lime-400 transition-colors">Opiniones</a></li>
+                <li><a href="#contact" class="hover:text-blue-400 dark:hover:text-lime-400 transition-colors">Contacto</a></li>
+              </ul>
+            </div>
+            <div class="space-y-2">
+              <h6 class="font-sans font-extrabold text-white text-[10px] tracking-wider uppercase">Laboratorio</h6>
+              <ul class="space-y-1.5 font-sans text-xs text-slate-400 dark:text-zinc-500">
+                <li><a href="#servicio-tecnico" class="hover:text-blue-400 dark:hover:text-lime-400 transition-colors">Reparaciones</a></li>
+                <li><a href="#servicio-tecnico" class="hover:text-blue-400 dark:hover:text-lime-400 transition-colors">Pantallas OLED</a></li>
+                <li><a href="#servicio-tecnico" class="hover:text-blue-400 dark:hover:text-lime-400 transition-colors">Baterías 100%</a></li>
+                <li><a href="#servicio-tecnico" class="hover:text-blue-400 dark:hover:text-lime-400 transition-colors">Presupuestos</a></li>
+              </ul>
+            </div>
+            <div class="space-y-2">
+              <h6 class="font-sans font-extrabold text-white text-[10px] tracking-wider uppercase">Soporte</h6>
+              <ul class="space-y-1.5 font-sans text-xs text-slate-400 dark:text-zinc-500">
+                <li><a href="#contact" class="hover:text-blue-400 dark:hover:text-lime-400 transition-colors">Contacto</a></li>
+                <li><a href="#" class="hover:text-blue-400 dark:hover:text-lime-400 transition-colors">Términos de Servicio</a></li>
+                <li><a href="#" class="hover:text-blue-400 dark:hover:text-lime-400 transition-colors">Políticas de Privacidad</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="md:col-span-3 flex flex-col items-start md:items-end space-y-3">
+            <h6 class="font-sans font-extrabold text-white text-[10px] tracking-wider uppercase">Redes Oficiales</h6>
+            <div class="flex gap-2.5">
+              <a href="http://www.instagram.com/freecellshop" target="_blank" rel="noreferrer" class="w-9 h-9 rounded-full bg-slate-900 border border-slate-800 hover:border-blue-500/50 dark:hover:border-lime-500 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-850 transition-all shadow-sm">
+                <i data-lucide="instagram" class="w-4 h-4"></i>
+              </a>
+              <a href="#" target="_blank" rel="noreferrer" class="w-9 h-9 rounded-full bg-slate-900 border border-slate-800 hover:border-blue-500/50 dark:hover:border-lime-500 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-850 transition-all shadow-sm">
+                <i data-lucide="compass" class="w-4 h-4"></i>
+              </a>
+              <a href="#" target="_blank" rel="noreferrer" class="w-9 h-9 rounded-full bg-slate-900 border border-slate-800 hover:border-blue-500/50 dark:hover:border-lime-500 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-850 transition-all shadow-sm">
+                <i data-lucide="message-square" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-sans text-xs">
+          <span class="text-slate-500">Free Cell Shop © 2026. Todos los derechos reservados.</span>
+          <span class="text-slate-500 dark:text-lime-500 font-bold uppercase tracking-widest text-[10px]" id="theme-footer-status">Tema Cyber Dark Activado</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="scroll-top-btn" onclick="scrollToTop()" class="fixed bottom-6 right-6 z-35 p-3.5 rounded-full border border-slate-200 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900 text-slate-850 dark:text-zinc-200 hover:text-blue-600 dark:hover:text-lime-500 hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all cursor-pointer shadow-lg shadow-black/5 opacity-0 pointer-events-none duration-300" aria-label="Volver arriba">
+      <i data-lucide="arrow-up" class="w-4 h-4"></i>
+    </button>
+
+
+    <!-- MODALS SECTION -->
+    
+    <!-- MODAL 1: PRESUPUESTO ONLINE (service-modal) -->
+    <div id="service-modal" class="fixed inset-0 z-50 items-center justify-center p-4 overflow-y-auto hidden">
+      <div onclick="closeModal('service-modal')" class="fixed inset-0 bg-black/70 backdrop-blur-sm"></div>
+      
+      <div class="relative w-full max-w-2xl bg-zinc-950 border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl z-10 text-white p-6 sm:p-8 text-left animate-in fade-in zoom-in-95 duration-200">
+        <button onclick="closeModal('service-modal')" class="absolute top-4 right-4 z-20 p-2 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-450 hover:text-white transition-colors cursor-pointer">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+
+        <div class="flex items-center gap-2 mb-2">
+          <i data-lucide="wrench" class="w-5 h-5 text-lime-400"></i>
+          <span class="font-sans text-[10px] uppercase font-black tracking-widest text-zinc-500">Servicio Técnico Oficial</span>
+        </div>
+        <h3 class="font-display font-black text-2xl tracking-tight text-white mb-6">Presupuesto Online Express</h3>
+
+        <form id="modal-tech-form" onsubmit="handleModalTechFormSubmit(event)" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-sans text-[10px] text-zinc-500 uppercase tracking-wide mb-1.5 font-bold">Tu Nombre</label>
+              <input type="text" id="modal-tech-nombre" required placeholder="Ej. Juan Pérez" class="w-full bg-zinc-900 border border-zinc-800 rounded-full px-5 py-3 text-xs text-white placeholder-zinc-550 focus:outline-none focus:border-lime-500 focus:ring-1 focus:ring-lime-500 font-semibold">
+            </div>
+            <div>
+              <label class="block font-sans text-[10px] text-zinc-500 uppercase tracking-wide mb-1.5 font-bold">Celular / Teléfono</label>
+              <input type="text" id="modal-tech-contacto" required placeholder="Ej. 094 123 456" class="w-full bg-zinc-900 border border-zinc-800 rounded-full px-5 py-3 text-xs text-white placeholder-zinc-550 focus:outline-none focus:border-lime-500 focus:ring-1 focus:ring-lime-500 font-semibold">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-sans text-[10px] text-zinc-500 uppercase tracking-wide mb-1.5 font-bold">Modelo del Equipo</label>
+              <input type="text" id="modal-tech-modelo" required placeholder="Ej. iPhone 13 Pro Max" class="w-full bg-zinc-900 border border-zinc-800 rounded-full px-5 py-3 text-xs text-white placeholder-zinc-550 focus:outline-none focus:border-lime-500 focus:ring-1 focus:ring-lime-500 font-semibold">
+            </div>
+            <div>
+              <label class="block font-sans text-[10px] text-zinc-500 uppercase tracking-wide mb-1.5 font-bold">Falla Común aproximada</label>
+              <select id="modal-tech-falla" required class="w-full bg-zinc-900 border border-zinc-800 rounded-full px-5 py-3 text-xs text-white focus:outline-none focus:border-lime-500 focus:ring-1 focus:ring-lime-500 font-semibold">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="Pantalla rota / Vidrio astillado">Pantalla rota / Vidrio astillado</option>
+                <option value="Cambio de batería (Vida útil baja)">Cambio de batería (Vida útil baja)</option>
+                <option value="Problema de carga / Puerto dañado">Problema de carga / Puerto dañado</option>
+                <option value="Falla de placa madre (Micro-soldadura)">Falla de placa madre (Micro-soldadura)</option>
+                <option value="Cámara rota o empañada">Cámara rota o empañada</option>
+                <option value="Botones / Parlantes con problemas">Botones / Parlantes con problemas</option>
+                <option value="Mojado / Daño por líquido">Mojado / Daño por líquido</option>
+                <option value="Otro problema (Detallar abajo)">Otro problema (Detallar abajo)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-sans text-[10px] text-zinc-500 uppercase tracking-wide mb-1.5 font-bold">Detalle de la falla</label>
+            <textarea id="modal-tech-descripcion" rows="3" placeholder="Describe los síntomas o lo que le ocurre..." class="w-full bg-zinc-900 border border-zinc-800 rounded-[20px] px-5 py-3 text-xs text-white placeholder-zinc-550 focus:outline-none focus:border-lime-500 focus:ring-1 focus:ring-lime-500 font-medium resize-none"></textarea>
+          </div>
+
+          <div id="modal-tech-success" class="hidden p-4 rounded-2xl border border-emerald-800 bg-emerald-950/20 text-emerald-400 font-bold text-xs tracking-tight flex items-center gap-2">
+            <i data-lucide="check" class="w-4 h-4 text-emerald-450"></i>
+            <span>¡Solicitud enviada con éxito! Abriendo chat en WhatsApp...</span>
+          </div>
+
+          <div class="flex gap-3 justify-end pt-4 border-t border-zinc-900">
+            <button type="button" onclick="closeModal('service-modal')" class="px-5 py-2.5 rounded-full font-sans font-bold text-xs border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-white transition-colors cursor-pointer">Cerrar</button>
+            <button type="submit" class="px-6 py-2.5 rounded-full font-sans font-extrabold text-xs tracking-tight bg-lime-500 hover:bg-lime-600 text-black shadow-lg flex items-center gap-1.5 cursor-pointer">
+              <span>ENVIAR PRESUPUESTO</span>
+              <i data-lucide="send" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL 2: OPINIONES DE GOOGLE (reviews-modal) -->
+    <div id="reviews-modal" class="fixed inset-0 z-50 items-center justify-center p-4 overflow-y-auto hidden">
+      <div onclick="closeModal('reviews-modal')" class="fixed inset-0 bg-black/70 backdrop-blur-sm"></div>
+      
+      <div class="relative w-full max-w-2xl bg-zinc-950 border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl z-10 text-white p-6 sm:p-8 text-left animate-in fade-in zoom-in-95 duration-200">
+        <button onclick="closeModal('reviews-modal')" class="absolute top-4 right-4 z-20 p-2 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white transition-colors cursor-pointer">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+
+        <!-- Google Rating Recap -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-6 border-b border-zinc-900">
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 rounded-full bg-white flex items-center justify-center font-black text-sm select-none shrink-0 shadow-sm">
+                <span class="text-[#4285F4]">G</span>
+              </div>
+              <span class="font-sans text-[10px] uppercase font-black tracking-widest text-zinc-500">Google Opiniones</span>
+            </div>
+            <h3 class="font-display font-black text-2xl tracking-tight text-white leading-tight">Nuestra Reputación Oficial</h3>
+          </div>
+
+          <!-- Average Stats -->
+          <div class="flex items-center gap-4 bg-zinc-900/60 border border-zinc-850 p-4 rounded-2xl shrink-0">
+            <div class="text-center">
+              <p class="font-display font-black text-3xl text-white tracking-tight leading-none">4.9</p>
+              <p class="font-sans text-[9px] text-zinc-500 uppercase font-bold mt-1">sobre 5 estrellas</p>
+            </div>
+            <div class="h-10 w-px bg-zinc-800" />
+            <div>
+              <div class="flex text-amber-400 gap-0.5">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+              </div>
+              <p class="font-sans text-[11px] text-zinc-400 font-semibold mt-1">328 opiniones verificadas</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scrollable reviews list -->
+        <div class="my-6 max-h-[350px] overflow-y-auto space-y-4 pr-1">
+          
+          <!-- Review 1 -->
+          <div class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-900 hover:border-zinc-850 transition-colors space-y-3">
+            <div class="flex items-start justify-between gap-4">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full overflow-hidden border border-zinc-800 shrink-0">
+                  <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Diego" class="w-full h-full object-cover">
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <h5 class="font-display font-bold text-xs text-zinc-100">Diego Falero</h5>
+                    <span class="inline-flex items-center gap-0.5 text-[8px] bg-emerald-950/40 text-emerald-400 px-1.5 py-0.5 rounded-full border border-emerald-900/30">
+                      <i data-lucide="check" class="w-2.5 h-2.5"></i> Verificado
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-2 mt-0.5">
+                    <div class="flex text-amber-400 gap-0.5">
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                    </div>
+                    <span class="font-sans text-[9px] text-zinc-500 font-semibold">Hace 2 días</span>
+                  </div>
+                </div>
+              </div>
+              <div class="w-5 h-5 rounded-full bg-zinc-950 border border-zinc-850 flex items-center justify-center font-sans text-[10px] text-zinc-500 font-bold shrink-0">G</div>
+            </div>
+            <p class="font-sans text-xs text-zinc-300 leading-relaxed font-light">"Excelente servicio. Compré un S25 Ultra combo y la Smart TV llegó de regalo tal como prometieron. El despacho a Montevideo fue en el mismo día, todo sellado y en perfecto estado. 10/10."</p>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-900 hover:border-zinc-850 transition-colors space-y-3">
+            <div class="flex items-start justify-between gap-4">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full overflow-hidden border border-zinc-800 shrink-0">
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80" alt="Valentina" class="w-full h-full object-cover">
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <h5 class="font-display font-bold text-xs text-zinc-100">Valentina Cabrera</h5>
+                    <span class="inline-flex items-center gap-0.5 text-[8px] bg-emerald-950/40 text-emerald-400 px-1.5 py-0.5 rounded-full border border-emerald-900/30">
+                      <i data-lucide="check" class="w-2.5 h-2.5"></i> Verificado
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-2 mt-0.5">
+                    <div class="flex text-amber-400 gap-0.5">
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                    </div>
+                    <span class="font-sans text-[9px] text-zinc-500 font-semibold">Hace 1 semana</span>
+                  </div>
+                </div>
+              </div>
+              <div class="w-5 h-5 rounded-full bg-zinc-950 border border-zinc-850 flex items-center justify-center font-sans text-[10px] text-zinc-500 font-bold shrink-0">G</div>
+            </div>
+            <p class="font-sans text-xs text-zinc-300 leading-relaxed font-light">"Excelente el servicio técnico. Lleve mi iPhone 13 Pro por cambio de módulo y batería, y quedó como nuevo en menos de dos horas. Me dieron garantía escrita y súper buen precio."</p>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-900 hover:border-zinc-850 transition-colors space-y-3">
+            <div class="flex items-start justify-between gap-4">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full overflow-hidden border border-zinc-800 shrink-0">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" alt="Santiago" class="w-full h-full object-cover">
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <h5 class="font-display font-bold text-xs text-zinc-100">Santiago Silva</h5>
+                    <span class="inline-flex items-center gap-0.5 text-[8px] bg-emerald-950/40 text-emerald-400 px-1.5 py-0.5 rounded-full border border-emerald-900/30">
+                      <i data-lucide="check" class="w-2.5 h-2.5"></i> Verificado
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-2 mt-0.5">
+                    <div class="flex text-amber-400 gap-0.5">
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                    </div>
+                    <span class="font-sans text-[9px] text-zinc-500 font-semibold">Hace 2 semanas</span>
+                  </div>
+                </div>
+              </div>
+              <div class="w-5 h-5 rounded-full bg-zinc-950 border border-zinc-850 flex items-center justify-center font-sans text-[10px] text-zinc-500 font-bold shrink-0">G</div>
+            </div>
+            <p class="font-sans text-xs text-zinc-300 leading-relaxed font-light">"Segunda compra que hago aquí. Primero un reloj y ahora el combo del iPhone 16 Pro Max con los AirPods de regalo. El soporte por WhatsApp es inmediato y muy profesional. Totalmente recomendados."</p>
+          </div>
+
+          <!-- Review 4 -->
+          <div class="p-5 rounded-2xl bg-zinc-900/40 border border-zinc-900 hover:border-zinc-850 transition-colors space-y-3">
+            <div class="flex items-start justify-between gap-4">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full overflow-hidden border border-zinc-800 shrink-0">
+                  <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=120&q=80" alt="Mariana" class="w-full h-full object-cover">
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <h5 class="font-display font-bold text-xs text-zinc-100">Mariana Gamarra</h5>
+                    <span class="inline-flex items-center gap-0.5 text-[8px] bg-emerald-950/40 text-emerald-400 px-1.5 py-0.5 rounded-full border border-emerald-900/30">
+                      <i data-lucide="check" class="w-2.5 h-2.5"></i> Verificado
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-2 mt-0.5">
+                    <div class="flex text-amber-400 gap-0.5">
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                    </div>
+                    <span class="font-sans text-[9px] text-zinc-500 font-semibold">Hace 3 semanas</span>
+                  </div>
+                </div>
+              </div>
+              <div class="w-5 h-5 rounded-full bg-zinc-950 border border-zinc-850 flex items-center justify-center font-sans text-[10px] text-zinc-500 font-bold shrink-0">G</div>
+            </div>
+            <p class="font-sans text-xs text-zinc-300 leading-relaxed font-light">"¡Súper conformes! Compré desde Maldonado y el envío llegó al día siguiente de mañana por DAC. Muy bien empaquetado, todo impecable y sellado de fábrica. El cargador GaN de 140W vuela."</p>
+          </div>
+
+        </div>
+
+        <!-- Call to actions -->
+        <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-zinc-900 justify-end">
+          <button onclick="closeModal('reviews-modal')" class="px-6 py-3 rounded-full font-sans font-bold text-xs tracking-tight border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-white transition-colors cursor-pointer text-center">Cerrar Ventana</button>
+          
+          <a href="https://maps.app.goo.gl/7H9kZASBXLxuypUX7" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-full font-sans font-extrabold text-xs tracking-tight bg-lime-500 hover:bg-lime-600 text-black shadow-lg shadow-lime-500/10 transition-transform hover:scale-[1.02] flex items-center justify-center gap-1.5 cursor-pointer text-center">
+            <span>VER TODOS EN GOOGLE MAPS</span>
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Lucide Icons Library CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      // Initialize Lucide Icons
+      lucide.createIcons();
+
+      // Theme Management (Oscuro / Claro)
+      let currentTheme = localStorage.getItem('theme') || 'dark';
+      updateThemeUI(currentTheme);
+
+      function toggleTheme() {
+        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', currentTheme);
+        updateThemeUI(currentTheme);
+      }
+
+      function updateThemeUI(theme) {
+        const htmlElement = document.documentElement;
+        const statusElement = document.getElementById('theme-footer-status');
+        
+        if (theme === 'dark') {
+          htmlElement.classList.add('dark');
+          if (statusElement) statusElement.innerText = 'Tema Cyber Dark Activado';
+        } else {
+          htmlElement.classList.remove('dark');
+          if (statusElement) statusElement.innerText = 'Diseño Elegante Premium Light';
+        }
+      }
+
+      // Hero Promo Slider Logic
+      let currentSlideIdx = 0;
+      const slides = document.querySelectorAll('.slider-slide');
+      const dots = document.querySelectorAll('.slider-dot');
+      let autoplayTimer = setInterval(nextSlide, 5000);
+
+      function showSlide(idx) {
+        slides.forEach((slide, i) => {
+          if (i === idx) {
+            slide.classList.remove('opacity-0');
+            slide.classList.add('opacity-100', 'z-10');
+          } else {
+            slide.classList.remove('opacity-100', 'z-10');
+            slide.classList.add('opacity-0');
+          }
+        });
+
+        dots.forEach((dot, i) => {
+          if (i === idx) {
+            dot.classList.add('bg-lime-500', 'scale-110');
+            dot.classList.remove('bg-zinc-600', 'bg-zinc-650', 'hover:bg-zinc-400');
+          } else {
+            dot.classList.remove('bg-lime-500', 'scale-110');
+            dot.classList.add('bg-zinc-600', 'bg-zinc-650', 'hover:bg-zinc-400');
+          }
+        });
+        currentSlideIdx = idx;
+      }
+
+      function nextSlide() {
+        let nextIdx = (currentSlideIdx + 1) % slides.length;
+        showSlide(nextIdx);
+      }
+
+      function prevSlide() {
+        resetAutoplay();
+        let prevIdx = (currentSlideIdx - 1 + slides.length) % slides.length;
+        showSlide(prevIdx);
+      }
+
+      function goToSlide(idx) {
+        resetAutoplay();
+        showSlide(idx);
+      }
+
+      function resetAutoplay() {
+        clearInterval(autoplayTimer);
+        autoplayTimer = setInterval(nextSlide, 5000);
+      }
+
+
+      // Mobile Menu Control
+      function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+        
+        if (menu.classList.contains('hidden')) {
+          menu.classList.remove('hidden');
+          iconOpen.classList.add('hidden');
+          iconClose.classList.remove('hidden');
+        } else {
+          menu.classList.add('hidden');
+          iconOpen.classList.remove('hidden');
+          iconClose.classList.add('hidden');
+        }
+      }
+
+      function closeMobileMenu() {
+        document.getElementById('mobile-menu').classList.add('hidden');
+        document.getElementById('menu-icon-open').classList.remove('hidden');
+        document.getElementById('menu-icon-close').classList.add('hidden');
+      }
+
+
+      // Active Navigation Link Scroll Tracking
+      window.addEventListener('scroll', () => {
+        const navbar = document.getElementById('navbar');
+        const scrollTopBtn = document.getElementById('scroll-top-btn');
+        
+        // Sticky white shadow border header transition
+        if (window.scrollY > 20) {
+          navbar.classList.add('shadow-md', 'dark:border-zinc-900/65', 'bg-white/95', 'dark:bg-[#050507]/95');
+          navbar.classList.remove('border-transparent');
+        } else {
+          navbar.classList.remove('shadow-md', 'dark:border-zinc-900/65', 'bg-white/95', 'dark:bg-[#050507]/95');
+          navbar.classList.add('border-transparent');
+        }
+
+        // Scroll to top button visibility toggle
+        if (window.scrollY > 500) {
+          scrollTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+          scrollTopBtn.classList.add('opacity-100');
+        } else {
+          scrollTopBtn.classList.add('opacity-0', 'pointer-events-none');
+          scrollTopBtn.classList.remove('opacity-100');
+        }
+
+        // Section tracking for active dots highlight
+        const sections = ['home', 'servicio-tecnico', 'features', 'opiniones', 'contact'];
+        const scrollPosition = window.scrollY + 160;
+
+        sections.forEach(secId => {
+          const el = document.getElementById(secId);
+          if (el) {
+            const top = el.offsetTop;
+            const height = el.offsetHeight;
+            const link = document.querySelector(`a[data-section="${secId}"]`);
+            
+            if (scrollPosition >= top && scrollPosition < top + height) {
+              if (link) {
+                document.querySelectorAll('.nav-link').forEach(nav => {
+                  nav.classList.remove('text-blue-600', 'dark:text-lime-500', 'font-black');
+                  nav.classList.add('text-slate-600', 'dark:text-zinc-400');
+                });
+                link.classList.add('text-blue-600', 'dark:text-lime-500', 'font-black');
+                link.classList.remove('text-slate-600', 'dark:text-zinc-400');
+              }
+            }
+          }
+        });
+      });
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+
+      // Modals Handler (Abir / Cerrar)
+      function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+      }
+
+      function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.classList.remove('overflow-hidden');
+      }
+
+
+      // FORM SUBMISSIONS LOGIC & LOCAL PERSISTENCE
+
+      // 1. Technical Service Form (on page)
+      function handleTechFormSubmit(e) {
+        e.preventDefault();
+        
+        const nombre = document.getElementById('tech-nombre').value;
+        const contacto = document.getElementById('tech-contacto').value;
+        const modelo = document.getElementById('tech-modelo').value;
+        const falla = document.getElementById('tech-falla').value;
+        const descripcion = document.getElementById('tech-descripcion').value;
+
+        const mensajeCompleto = `🔧 *SOLICITUD DE PRESUPUESTO TÉCNICO*
+---------------------------------------
+👤 *Nombre:* ${nombre}
+📞 *Contacto:* ${contacto}
+📱 *Modelo:* ${modelo}
+⚠️ *Falla:* ${falla}
+📝 *Detalles:* ${descripcion || 'Ninguno'}
+---------------------------------------
+Enviado desde el formulario de Servicio Técnico Oficial.`;
+
+        try {
+          // Backup locally in localStorage
+          const solicitudes = JSON.parse(localStorage.getItem('solicitudes_servicio_tecnico') || '[]');
+          solicitudes.push({
+            nombre, contacto, modelo, falla, descripcion, mensajeCompleto,
+            fecha: new Date().toISOString()
+          });
+          localStorage.setItem('solicitudes_servicio_tecnico', JSON.stringify(solicitudes));
+
+          // Reveal Success Panel inside Form
+          const successBox = document.getElementById('tech-form-success');
+          successBox.classList.remove('hidden');
+          
+          // Disable button
+          const btn = document.getElementById('tech-form-btn');
+          btn.disabled = true;
+          btn.classList.add('opacity-60', 'pointer-events-none');
+
+          setTimeout(() => {
+            // Redirect to WhatsApp
+            const textEncoded = encodeURIComponent(mensajeCompleto);
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=59894423423&text=${textEncoded}`;
+            window.open(whatsappUrl, '_blank') || (window.location.href = whatsappUrl);
+
+            // Reset fields
+            document.getElementById('tech-nombre').value = '';
+            document.getElementById('tech-contacto').value = '';
+            document.getElementById('tech-modelo').value = '';
+            document.getElementById('tech-falla').value = '';
+            document.getElementById('tech-descripcion').value = '';
+
+            // Restore elements
+            successBox.classList.add('hidden');
+            btn.disabled = false;
+            btn.classList.remove('opacity-60', 'pointer-events-none');
+          }, 1500);
+
+        } catch (err) {
+          console.error("Fallo la simulación local del presupuesto:", err);
+        }
+      }
+
+      // 2. Modal Tech Service Form
+      function handleModalTechFormSubmit(e) {
+        e.preventDefault();
+        
+        const nombre = document.getElementById('modal-tech-nombre').value;
+        const contacto = document.getElementById('modal-tech-contacto').value;
+        const modelo = document.getElementById('modal-tech-modelo').value;
+        const falla = document.getElementById('modal-tech-falla').value;
+        const descripcion = document.getElementById('modal-tech-descripcion').value;
+
+        const mensajeCompleto = `🔧 *SOLICITUD DE PRESUPUESTO TÉCNICO (MODAL)*
+---------------------------------------
+👤 *Nombre:* ${nombre}
+📞 *Contacto:* ${contacto}
+📱 *Modelo:* ${modelo}
+⚠️ *Falla:* ${falla}
+📝 *Detalles:* ${descripcion || 'Ninguno'}
+---------------------------------------
+Enviado desde el Presupuesto Online Oficial.`;
+
+        try {
+          // Backup locally in localStorage
+          const solicitudes = JSON.parse(localStorage.getItem('solicitudes_servicio_tecnico') || '[]');
+          solicitudes.push({
+            nombre, contacto, modelo, falla, descripcion, mensajeCompleto,
+            fecha: new Date().toISOString()
+          });
+          localStorage.setItem('solicitudes_servicio_tecnico', JSON.stringify(solicitudes));
+
+          // Success notification show
+          const successBox = document.getElementById('modal-tech-success');
+          successBox.classList.remove('hidden');
+
+          setTimeout(() => {
+            // WhatsApp redirection link dispatching
+            const textEncoded = encodeURIComponent(mensajeCompleto);
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=59894423423&text=${textEncoded}`;
+            window.open(whatsappUrl, '_blank') || (window.location.href = whatsappUrl);
+
+            // Clean form inside Modal
+            document.getElementById('modal-tech-nombre').value = '';
+            document.getElementById('modal-tech-contacto').value = '';
+            document.getElementById('modal-tech-modelo').value = '';
+            document.getElementById('modal-tech-falla').value = '';
+            document.getElementById('modal-tech-descripcion').value = '';
+            
+            successBox.classList.add('hidden');
+            closeModal('service-modal');
+          }, 1500);
+
+        } catch (err) {
+          console.error("Fallo la simulación local del presupuesto modal:", err);
+        }
+      }
+
+      // 3. Contact Form Submission
+      function handleContactFormSubmit(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('contact-name').value;
+        const email = document.getElementById('contact-email').value;
+        const msg = document.getElementById('contact-msg').value;
+
+        try {
+          // Backup locally in localStorage
+          const mensajes = JSON.parse(localStorage.getItem('mensajes_contacto') || '[]');
+          mensajes.push({
+            nombre: name,
+            email: email,
+            mensaje: msg,
+            fecha: new Date().toISOString()
+          });
+          localStorage.setItem('mensajes_contacto', JSON.stringify(mensajes));
+
+          // Show Toast Success
+          const successBox = document.getElementById('contact-success');
+          successBox.classList.remove('hidden');
+
+          const btn = document.getElementById('contact-btn');
+          btn.disabled = true;
+          btn.classList.add('opacity-60', 'pointer-events-none');
+
+          setTimeout(() => {
+            // Clear input fields
+            document.getElementById('contact-name').value = '';
+            document.getElementById('contact-email').value = '';
+            document.getElementById('contact-msg').value = '';
+
+            successBox.classList.add('hidden');
+            btn.disabled = false;
+            btn.classList.remove('opacity-60', 'pointer-events-none');
+          }, 4000);
+
+        } catch (err) {
+          console.error("Fallo de guardado de mensaje local:", err);
+        }
+      }
+
+      // 4. Newsletter Subscription Submit
+      function handleNewsletterSubmit(e) {
+        e.preventDefault();
+
+        const email = document.getElementById('newsletter-email').value;
+
+        try {
+          // Save list to local storage
+          const suscritos = JSON.parse(localStorage.getItem('newsletter_suscritos') || '[]');
+          suscritos.push({
+            email,
+            fecha: new Date().toISOString()
+          });
+          localStorage.setItem('newsletter_suscritos', JSON.stringify(suscritos));
+
+          // Hide input form line layout
+          document.getElementById('newsletter-email').classList.add('hidden');
+          document.getElementById('newsletter-btn').classList.add('hidden');
+
+          // Reveal success banner with high contrast styles
+          const successBox = document.getElementById('newsletter-success');
+          successBox.classList.remove('hidden');
+
+          setTimeout(() => {
+            document.getElementById('newsletter-email').value = '';
+            document.getElementById('newsletter-email').classList.remove('hidden');
+            document.getElementById('newsletter-btn').classList.remove('hidden');
+            successBox.classList.add('hidden');
+          }, 5000);
+
+        } catch (err) {
+          console.error("Fallo de suscripción local:", err);
+        }
+      }
+    </script>
   </body>
 </html>
-

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
-  Search, 
   Instagram, 
   Send, 
   PhoneCall, 
@@ -23,51 +22,20 @@ import {
   Globe
 } from 'lucide-react';
 
-import { Product, CartItem, Testimonial } from './types';
-import { PRODUCTS, TESTIMONIALS } from './data';
+import { Testimonial } from './types';
+import { TESTIMONIALS } from './data';
 
 import Navbar from './components/Navbar';
 import Logo from './components/Logo';
 import PromoSlider from './components/PromoSlider';
 import BannerButtons from './components/BannerButtons';
-import Categories from './components/Categories';
-import ProductCard from './components/ProductCard';
 import Features from './components/Features';
-import CartDrawer from './components/CartDrawer';
 import Newsletter from './components/Newsletter';
 import TechnicalServiceSection from './components/TechnicalServiceSection';
-import { useFirebase } from './context/FirebaseContext';
-import { db } from './firebase';
-import { collection, getDocs } from 'firebase/firestore';
 
 export default function App() {
-  const { 
-    cart, 
-    addToCart, 
-    updateQuantity, 
-    removeItem, 
-    clearCart, 
-    submitContactMessage 
-  } = useFirebase();
-
   // Global States
-  const [products, setProducts] = useState<Product[]>(PRODUCTS);
-  const [scrapeStatus, setScrapeStatus] = useState<{
-    lastScrapeTime: string | null;
-    status: 'idle' | 'success' | 'error' | 'scraping';
-    error: string | null;
-    count: number;
-    interval: string;
-    target: string;
-  } | null>(null);
-  
-  const [isSyncing, setIsSyncing] = useState(false);
-  const [syncFeedback, setSyncFeedback] = useState<string | null>(null);
-  
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'smartphones' | 'accessories' | 'gadgets'>('all');
-  const [searchQuery, setSearchQuery] = useState('');
   const [activeSection, setActiveSection] = useState('home');
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Dark Mode State is permanently set to dark for consistent premium cyber look
@@ -92,7 +60,7 @@ export default function App() {
       setShowScrollTop(window.scrollY > 500);
 
       const scrollPosition = window.scrollY + 160; // offset
-      const sections = ['home', 'productos', 'servicio-tecnico', 'features', 'opiniones', 'contact'];
+      const sections = ['home', 'servicio-tecnico', 'features', 'opiniones', 'contact'];
       
       for (const section of sections) {
         const el = document.getElementById(section);
@@ -111,91 +79,6 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Fetch products directly from Firestore (client-side query for static hosting/GitHub Pages)
-  useEffect(() => {
-    const fetchInitialData = async () => {
-      try {
-        console.log('Consultando colección "productos" directamente desde Firestore client-side...');
-        const querySnapshot = await getDocs(collection(db, 'productos'));
-        const productsList: Product[] = [];
-        
-        querySnapshot.forEach((docSnap) => {
-          const data = docSnap.data();
-          productsList.push({
-            id: data.id || docSnap.id,
-            name: data.nombre || '',
-            category: data.categoria || 'smartphones',
-            price: Number(data.precio || 0),
-            originalPrice: data.precioOriginal ? Number(data.precioOriginal) : undefined,
-            description: data.descripcion || '',
-            rating: Number(data.calificacion || 0),
-            image: data.imagen || '',
-            tags: data.etiquetas || [],
-            specs: data.especificaciones || [],
-            features: data.caracteristicas || [],
-            inStock: data.enStock !== undefined ? data.enStock : true,
-            isNew: data.esNuevo !== undefined ? data.esNuevo : false,
-            mlLink: data.enlaceMercadoLibre || ''
-          });
-        });
-
-        if (productsList.length > 0) {
-          setProducts(productsList);
-          setScrapeStatus({
-            lastScrapeTime: new Date().toLocaleString('es-UY', { timeZone: 'America/Montevideo' }),
-            status: 'success',
-            error: null,
-            count: productsList.length,
-            interval: 'Cada 24 horas (Automático)',
-            target: 'https://listado.mercadolibre.com.uy/_CustId_438656875'
-          });
-        } else {
-          console.log('La colección "productos" de Firestore está vacía. Usando datos estáticos de respaldo.');
-          setProducts(PRODUCTS);
-        }
-      } catch (err) {
-        console.error('Error al consultar Firestore de forma directa. Cargando productos estáticos locales:', err);
-        setProducts(PRODUCTS);
-      }
-    };
-
-    fetchInitialData();
-  }, []);
-
-  // Force manual sync trigger (Mock client-side sync since there is no backend server in static gh-pages)
-  const handleSyncProducts = async () => {
-    setIsSyncing(true);
-    setSyncFeedback(null);
-    try {
-      // Simular sincronización exitosa de cliente
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      setSyncFeedback('Catálogo local sincronizado correctamente con la base de datos de Firebase.');
-    } catch (error: any) {
-      console.error('Error al sincronizar:', error);
-      setSyncFeedback('Error de comunicación con Firebase.');
-    } finally {
-      setIsSyncing(false);
-      setTimeout(() => {
-        setSyncFeedback(null);
-      }, 5000);
-    }
-  };
-
-  // Filter products by logic
-  const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
-      const matchCategory = selectedCategory === 'all' || product.category === selectedCategory;
-      const matchSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          product.specs.some(spec => spec.toLowerCase().includes(searchQuery.toLowerCase()));
-      return matchCategory && matchSearch;
-    });
-  }, [products, selectedCategory, searchQuery]);
-
-  const cartCount = useMemo(() => {
-    return cart.reduce((sum, item) => sum + item.quantity, 0);
-  }, [cart]);
-
   // Custom visual navigation scroll clicker
   const handleNavigate = (sectionId: string) => {
     const el = document.getElementById(sectionId);
@@ -212,14 +95,26 @@ export default function App() {
     }
   };
 
-  // Real-time Firestore contact Message writing Dispatcher
+  // Local contact Message writing Dispatcher (Saved to localStorage)
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!contactName || !contactEmail || !contactMsg) return;
 
     setIsSendingMsg(true);
     try {
-      await submitContactMessage(contactName, contactEmail, contactMsg);
+      // Guardar el mensaje localmente
+      const mensajes = JSON.parse(localStorage.getItem('mensajes_contacto') || '[]');
+      mensajes.push({
+        nombre: contactName,
+        email: contactEmail,
+        mensaje: contactMsg,
+        fecha: new Date().toISOString()
+      });
+      localStorage.setItem('mensajes_contacto', JSON.stringify(mensajes));
+
+      // Simular latencia de red para mejor UX
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      
       setIsSendingMsg(false);
       setMsgSentSuccess(true);
       setContactName('');
@@ -229,7 +124,7 @@ export default function App() {
         setMsgSentSuccess(false);
       }, 5000);
     } catch (err) {
-      console.error("Fallo el envío del mensaje en Firestore:", err);
+      console.error("Fallo el envío local del mensaje:", err);
       setIsSendingMsg(false);
     }
   };
@@ -256,60 +151,6 @@ export default function App() {
 
       {/* Trust standards layout segment */}
       <Features />
-
-      {/* Product Catalog Section */}
-      <section id="productos" className="py-24 border-t border-slate-100 dark:border-zinc-900 relative overflow-hidden bg-white dark:bg-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Categories pills header */}
-          <Categories 
-            selectedCategory={selectedCategory} 
-            onSelectCategory={setSelectedCategory} 
-          />
-
-          {/* Search Bar & Stats */}
-          <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-slate-100 dark:border-zinc-900 pb-6">
-            <div className="relative w-full sm:max-w-xs">
-              <Search className="absolute left-4 top-3.5 h-4 w-4 text-slate-400 dark:text-zinc-550" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Buscar celular, accesorio..."
-                className="w-full bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-850 rounded-full pl-10 pr-4 py-3 text-xs text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-600 dark:focus:border-lime-500 focus:ring-1 focus:ring-blue-600 dark:focus:ring-lime-500 transition-all font-semibold"
-              />
-            </div>
-            
-            <span className="font-sans text-xs text-slate-400 dark:text-zinc-550 font-semibold uppercase">
-              {filteredProducts.length} {filteredProducts.length === 1 ? 'Producto encontrado' : 'Productos encontrados'}
-            </span>
-          </div>
-
-          {/* Grid of Product Cards */}
-          {filteredProducts.length > 0 ? (
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {filteredProducts.map((product) => (
-                <ProductCard 
-                  key={product.id} 
-                  product={product} 
-                  onAddToCart={addToCart} 
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="mt-16 text-center space-y-4">
-              <AlertCircle className="w-12 h-12 text-slate-300 dark:text-zinc-700 mx-auto" />
-              <div className="space-y-1">
-                <h4 className="font-display font-bold text-base text-slate-800 dark:text-zinc-200">No se encontraron productos</h4>
-                <p className="font-sans text-xs text-slate-500 dark:text-zinc-400 max-w-xs mx-auto">
-                  Prueba cambiando de categoría o buscando un término diferente.
-                </p>
-              </div>
-            </div>
-          )}
-
-        </div>
-      </section>
 
       {/* Testimonials Review Slider */}
       <section id="opiniones" className="py-24 border-t border-slate-100 dark:border-zinc-900 relative overflow-hidden bg-slate-50/50 dark:bg-zinc-950/20">

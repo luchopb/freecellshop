@@ -11,11 +11,8 @@ import {
   Layers,
   BatteryCharging
 } from 'lucide-react';
-import { useFirebase } from '../context/FirebaseContext';
 
 export default function TechnicalServiceSection() {
-  const { submitContactMessage } = useFirebase();
-
   // Form states
   const [nombre, setNombre] = useState('');
   const [contacto, setContacto] = useState('');
@@ -50,8 +47,18 @@ Método de contacto: ${contacto}
 Enviado desde el sitio web oficial.`;
 
     try {
-      // 1. Guardar en la base de datos de Firebase para respaldo
-      await submitContactMessage(nombre, contacto, mensajeCompleto);
+      // Guardar localmente para respaldo
+      const solicitudes = JSON.parse(localStorage.getItem('solicitudes_servicio_tecnico') || '[]');
+      solicitudes.push({
+        nombre,
+        contacto,
+        modelo,
+        falla,
+        descripcion,
+        mensajeCompleto,
+        fecha: new Date().toISOString()
+      });
+      localStorage.setItem('solicitudes_servicio_tecnico', JSON.stringify(solicitudes));
       
       // 2. Redirigir a WhatsApp
       const textEncoded = encodeURIComponent(mensajeCompleto);

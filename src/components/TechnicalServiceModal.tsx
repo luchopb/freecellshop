@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Wrench, Shield, Check, Loader2, Cpu, Smartphone, Sparkles, Send } from 'lucide-react';
-import { useFirebase } from '../context/FirebaseContext';
 
 interface TechnicalServiceModalProps {
   isOpen: boolean;
@@ -9,8 +8,6 @@ interface TechnicalServiceModalProps {
 }
 
 export default function TechnicalServiceModal({ isOpen, onClose }: TechnicalServiceModalProps) {
-  const { submitContactMessage } = useFirebase();
-
   // Form states
   const [nombre, setNombre] = useState('');
   const [contacto, setContacto] = useState('');
@@ -45,7 +42,22 @@ Método de contacto: ${contacto}
 Enviado desde el formulario de Servicio Técnico Oficial.`;
 
     try {
-      await submitContactMessage(nombre, contacto, mensajeCompleto);
+      // Guardar localmente en localStorage para mantener el registro de servicio técnico
+      const solicitudes = JSON.parse(localStorage.getItem('solicitudes_servicio_tecnico') || '[]');
+      solicitudes.push({
+        nombre,
+        contacto,
+        modelo,
+        falla,
+        descripcion,
+        mensajeCompleto,
+        fecha: new Date().toISOString()
+      });
+      localStorage.setItem('solicitudes_servicio_tecnico', JSON.stringify(solicitudes));
+
+      // Simular latencia de envío
+      await new Promise((resolve) => setTimeout(resolve, 1200));
+
       setEnviado(true);
       // Reset form
       setNombre('');
@@ -53,7 +65,7 @@ Enviado desde el formulario de Servicio Técnico Oficial.`;
       setModelo('');
       setDescripcion('');
     } catch (err: any) {
-      console.error('Error al guardar solicitud de servicio técnico:', err);
+      console.error('Error al guardar solicitud de servicio técnico localmente:', err);
       setError('Ocurrió un error al enviar tu solicitud. Intenta de nuevo por favor.');
     } finally {
       setLoading(false);

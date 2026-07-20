@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Cpu, LogOut, User, Sun, Moon } from 'lucide-react';
-import { useFirebase } from '../context/FirebaseContext';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import Logo from './Logo';
 
 interface NavbarProps {
@@ -12,8 +11,6 @@ interface NavbarProps {
 export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const { user, loginWithGoogle, logout, loading } = useFirebase();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,7 +22,6 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
 
   const navLinks = [
     { name: 'Inicio', id: 'home' },
-    { name: 'Catálogo', id: 'productos' },
     { name: 'Servicio Técnico', id: 'servicio-tecnico' },
     { name: 'Características', id: 'features' },
     { name: 'Opiniones', id: 'opiniones' },
@@ -72,7 +68,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
                   {link.name}
                   {activeSection === link.id && (
                     <motion.div
-                      layoutId="activeNavIndicator"
+                       layoutId="activeNavIndicator"
                       className="absolute bottom-0 left-4 right-4 h-[2.5px] bg-blue-600 dark:bg-lime-500 rounded-full shadow-[0_1px_5px_rgba(37,99,235,0.4)] dark:shadow-[0_1px_5px_rgba(132,204,22,0.4)]"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />

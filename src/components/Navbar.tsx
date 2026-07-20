@@ -25,6 +25,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
 
   const navLinks = [
     { name: 'Inicio', id: 'home' },
+    { name: 'Catálogo', id: 'productos' },
     { name: 'Servicio Técnico', id: 'servicio-tecnico' },
     { name: 'Características', id: 'features' },
     { name: 'Opiniones', id: 'opiniones' },

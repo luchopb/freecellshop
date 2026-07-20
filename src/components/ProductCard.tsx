@@ -4,6 +4,7 @@ import { Star, Plus, Check, ChevronDown, ChevronUp, Cpu, Truck, Package, Eye } f
 import { Product } from '../types';
 
 interface ProductCardProps {
+  key?: React.Key;
   product: Product;
   onAddToCart: (product: Product) => void;
 }
